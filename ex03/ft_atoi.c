@@ -1,12 +1,6 @@
-#include <stdio.h>/*strが7桁になった瞬間にバグ起きる*/
-
-int		ft_atoi(char *str)
+/*#include <stdio.h>*/
+void	ft_nbs(int *nb, char *str)
 {
-	int		nb[8];
-	
-	nb[0] = 0;/*the address of str*/
-	nb[1] = 0;
-	nb[4] = 1;
 	while (str[nb[0]] == 32 || (str[nb[0]] >= 9 && str[nb[0]] <= 13))
 		nb[0]++;
 	while (str[nb[0]] == 43 || str[nb[0]] == 45)
@@ -19,16 +13,27 @@ int		ft_atoi(char *str)
 	{
 		nb[4] *= -1;
 		nb[1]--;
-	}/*fine until here*/
+	}
 	nb[2] = nb[0];
 	while (str[nb[0]] >= 48 && str[nb[0]] <= 57)
 		nb[0]++;
 	nb[3] = nb[0] - nb[2] - 1;
+}
+
+int	ft_atoi(char *str)
+{
+	int		nb[8];
+
+	nb[0] = 0;
+	nb[1] = 0;
+	nb[4] = 1;
+	nb[6] = 0;
+	ft_nbs(nb, str);
 	while (nb[1] <= nb[3])
 	{
 		nb[7] = nb[3] - nb[1];
 		nb[5] = str[nb[2]] - 48;
-		while(nb[7])
+		while (nb[7])
 		{
 			nb[5] *= 10;
 			nb[7]--;
@@ -41,8 +46,8 @@ int		ft_atoi(char *str)
 	return (nb[6]);
 }
 
-int	main(void)
+/*int	main(void)
 {
-	char	str[] = "   89";
+	char	str[] = " -829091605";
 	printf("%d", ft_atoi(str));
-}
+}*/
